@@ -5,13 +5,30 @@
 #                                                     +:+ +:+         +:+      #
 #    By: mrami <mrami@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/04/13 12:33:12 by mrami             #+#    #+#              #
-#    Updated: 2023/04/13 12:38:58 by mrami            ###   ########.fr        #
+#    Created: 2023/04/18 02:09:36 by mrami             #+#    #+#              #
+#    Updated: 2023/04/18 02:23:01 by mrami            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
+cc = cc
 CFlags = -Wall -Wextra -Werror
-CC = cc
-HEADER = fdf.h
-framework= -framework OpenGL -framework AppKit -g
+MLx_Frime = -lmlx -framework OpenGL -framework AppKit
+CFiles = fdf.c
+OFiles = $(CFiles:.c=.o)
+# -----------------------------------
+all: $(NAME)
+
+$(NAME): $(OFiles)
+		$(cc) $(CFlags) $(MLx_Frime) $(CFiles) -o $(NAME)
+%.c: %.o
+	$(cc) $(CFlags) -c $<
+# ------------------------------------
+clean:
+		@rm -rf $(OFiles)
+fclean: clean
+		@rm -rf $(NAME)
+# ------------------------------------
+re: fclean all
+# -----------------------------------
+.PHONY: all clean fclean re
