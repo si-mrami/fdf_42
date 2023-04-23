@@ -6,12 +6,14 @@
 /*   By: mrami <mrami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 12:32:35 by mrami             #+#    #+#             */
-/*   Updated: 2023/04/18 03:30:04 by mrami            ###   ########.fr       */
+/*   Updated: 2023/04/23 10:12:48 by mrami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
 #include <stdlib.h>
+#include <stdio.h>
+#include"fdf.h"
 
 void	ft_draw_line(void *mlx, void *win, int x0, int y0, int x1, int y1)
 {
@@ -48,7 +50,7 @@ void	ft_draw_line(void *mlx, void *win, int x0, int y0, int x1, int y1)
     }
 }
 
-int main()
+int main(int argc, char *argv[])
 {
 	void	*mlx;
 	void	*win;
@@ -56,9 +58,18 @@ int main()
 	int		x1;
 	int		y0;
 	int		y1;
+	char	*map_name;
+	int		fd;
 
+	(void)argc;
+	fd = open(argv[1], O_RDONLY);
+	while ((map_name = get_next_line(fd)))
+	{
+		printf("%s", map_name);
+		free(map_name);
+	}
 	mlx = mlx_init();
-	win = mlx_new_window(mlx, 1100, 1260, "fdf_42");
+	win = mlx_new_window(mlx, 1000, 1260, "fdf_42");
 	x0 = 200;
 	x1 = 200;
 	y0 = 100;
