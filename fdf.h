@@ -6,7 +6,7 @@
 /*   By: mrami <mrami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 22:12:42 by mrami             #+#    #+#             */
-/*   Updated: 2023/05/09 12:57:57 by mrami            ###   ########.fr       */
+/*   Updated: 2023/05/12 17:07:59 by mrami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,16 @@
 # define BUFFER_SIZE 10
 # endif
 
-typedef	struct	s_point
+typedef	struct	s_mtr
 {
-	int		x;
-	int		y;
-	char	*ptr;
-	int		maps_len;
-}	t_point;
+	int		x1;
+	int		y1;
+	int		x0;
+	int		y0;
+	int		width;
+	int		height;
+	char	**mtx;
+}	t_mtr;
 
 size_t	ft_strlen(char const *s);
 char	*ft_strdup(char *s1);
