@@ -6,7 +6,7 @@
 /*   By: mrami <mrami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 12:32:35 by mrami             #+#    #+#             */
-/*   Updated: 2023/05/12 16:44:15 by mrami            ###   ########.fr       */
+/*   Updated: 2023/05/17 15:10:36 by mrami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_calcu_maps_width(char *maps)
 
 	fd = open(maps, O_RDONLY);
 	line = get_next_line(fd);
-	spliter = ft_split(maps, ' ');
+	spliter = ft_split(line, ' ');
 	maps_width = 0;
 	while (spliter[maps_width])
 		maps_width++;
@@ -58,58 +58,56 @@ void	ft_read_maps(char *maps, t_mtr *ptr)
 	int		fd;
 	char	*line;
 	int		i;
-	int		j;
 
 	fd = open(maps, O_RDONLY);
 	if (fd < 0)
 		return ;
 	ptr->height = ft_caluc_maps_height(maps);
-	ptr->width = ft_calcu_maps_width(maps);
-	ptr->mtx = malloc((sizeof(int *)) * (ptr->height + 1));
+	ptr->mtx = malloc((ptr->height + 1) * sizeof(char *));
 	if (!ptr->mtx)
 		return ;
+	line = get_next_line(fd);
 	i = 0;
-	while (i < ptr->height)
+	while (line)
 	{
+		ptr->mtx[i] = line;
+		if (!ptr->mtx[i])
+			break ;
 		line = get_next_line(fd);
-		ptr->mtx[i] = malloc((sizeof(int)) * ptr->width);
-		if (ptr->mtx[i])
-			return ;
-		j = 0;
-		while (j < ptr->width && line[j])
-		{
-			ptr->mtx[i][j] = line[j];
-			j++;
-		}
-		free(line);
 		i++;
 	}
+	ptr->mtx[i] = NULL;
 }
 
 int	main(int argc, char *argv[])
 {
-	t_mtr	maps;
+	t_mtr	ptr;
+	int		color;
 	int		i;
 	int		j;
+	int		factor;
 
-	i = 0;
+	(void)argc;
+	ptr.mlx_ptr = mlx_init();
+	ptr.win_ptr = mlx_new_window(ptr.mlx_ptr , WIDTH, HEIGHT, "fdf_42");
+	ptr.height = ft_caluc_maps_height(argv[1]);
+	ptr.width = ft_calcu_maps_width(argv[1]);
+	color = 0xFFFFFF;
 	j = 0;
-	if (argc < 2)
-		write(1, "Error:\n", 8);
-	ft_read_maps(argv[1], &maps);
-	printf("%d\n", maps.height);
-	printf("%d\n", maps.width);
-	while (i < maps.height)
+	factor = 30;
+	while (j < ptr.height)
 	{
-		// printf("test01\n");
-		while (j < maps.width)
+		i = 0;
+		while (i < ptr.width)
 		{
-			// printf("test02\n");
-			printf("%c", maps.mtx[i][j]);
-			j++;
+			if (i < ptr.width - 1)
+				ft_draw_line(ptr.mlx_ptr , ptr.win_ptr, (i * factor), (j * factor) , (i + 1) * factor, (j * factor), color);
+			if (j < ptr.height - 1)
+				ft_draw_line(ptr.mlx_ptr , ptr.win_ptr, (i * factor), (j * factor), i * factor, (j + 1) * factor, color);
+			i++;
 		}
-		i++;
+		j++;
 	}
-
-	return (0);
+	mlx_loop(ptr.mlx_ptr );
+	return 0;
 }

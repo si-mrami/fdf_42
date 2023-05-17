@@ -6,7 +6,7 @@
 /*   By: mrami <mrami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 22:12:42 by mrami             #+#    #+#             */
-/*   Updated: 2023/05/12 17:07:59 by mrami            ###   ########.fr       */
+/*   Updated: 2023/05/17 15:01:55 by mrami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,32 @@
 # include<stdlib.h>
 # include<stdio.h>
 # include<limits.h>
+#include<math.h>
 
 # ifndef BUFFER_SIZE
 # define BUFFER_SIZE 10
 # endif
 
+#define WIDTH 1920
+#define HEIGHT 1080
+
 typedef	struct	s_mtr
 {
-	int		x1;
-	int		y1;
 	int		x0;
+	int		x1;
 	int		y0;
+	int		y1;
+	int		X0;
+	int		X1;
+	int		Y0;
+	int		Y1;
 	int		width;
 	int		height;
+	void	*mlx_ptr;
+	void	*win_ptr;
 	char	**mtx;
+	char	*mps;
+	char	*read;
 }	t_mtr;
 
 size_t	ft_strlen(char const *s);
@@ -49,5 +61,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	**ft_free(char **dst, int len);
 char	**ft_allocation(char **dst, char const *s, char c);
 char	**ft_split(char const *s, char c);
+void	ft_draw_line(void *mlx_ptr, void *win_ptr, int X0, int Y0, int X1, int Y1, int color);
 
 #endif
