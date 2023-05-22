@@ -6,7 +6,7 @@
 /*   By: mrami <mrami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:49:18 by mrami             #+#    #+#             */
-/*   Updated: 2023/05/07 15:51:59 by mrami            ###   ########.fr       */
+/*   Updated: 2023/05/22 11:28:23 by mrami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,50 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	dst[j] = '\0';
 	return (dst);
+}
+
+/* convert a hexadecimal string to decimal */
+
+int	ft_hex_to_dec(char *hexa)
+{
+	int	len;
+	int	i;
+	int	base;
+	int	decimal;
+
+	base = 1;
+	decimal = 0;
+	len = ft_strlen(hexa);
+	i = len - 1;
+	while (i >= 0)
+	{
+		if (hexa[i] >= '0' && hexa[i] <= '9')
+			decimal += (hexa[i] - 48) * base;
+		if (hexa[i] >= 'a' && hexa[i] <= 'f')
+			decimal += (hexa[i] - 87) * base;
+		if (hexa[i] >= 'A' && hexa[i] <= 'F')
+			decimal += (hexa[i] - 55) * base;
+		base *= 16;
+		i--;
+	}
+	return (decimal);
+}
+
+/* convert deg to red */
+
+int	ft_convert(int deg)
+{
+	int	res;
+
+	res = deg * M_PI / 180;
+	return (res);
+}
+
+/* all the tronstformation */
+
+void	ft_tronsformation(t_mtr *ptr)
+{
+	ptr->zoming = 2;
+	ptr->teta = ft_convert(30);
+	ptr->factor = 2;
 }

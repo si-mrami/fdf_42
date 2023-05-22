@@ -6,7 +6,7 @@
 /*   By: mrami <mrami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 12:32:35 by mrami             #+#    #+#             */
-/*   Updated: 2023/05/17 15:10:36 by mrami            ###   ########.fr       */
+/*   Updated: 2023/05/20 01:24:40 by mrami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,31 +53,31 @@ int	ft_calcu_maps_width(char *maps)
 
 /* read maps */
 
-void	ft_read_maps(char *maps, t_mtr *ptr)
-{
-	int		fd;
-	char	*line;
-	int		i;
+// void	ft_read_maps(char *maps, t_mtr *ptr)
+// {
+// 	int		fd;
+// 	char	*line;
+// 	int		i;
 
-	fd = open(maps, O_RDONLY);
-	if (fd < 0)
-		return ;
-	ptr->height = ft_caluc_maps_height(maps);
-	ptr->mtx = malloc((ptr->height + 1) * sizeof(char *));
-	if (!ptr->mtx)
-		return ;
-	line = get_next_line(fd);
-	i = 0;
-	while (line)
-	{
-		ptr->mtx[i] = line;
-		if (!ptr->mtx[i])
-			break ;
-		line = get_next_line(fd);
-		i++;
-	}
-	ptr->mtx[i] = NULL;
-}
+// 	fd = open(maps, O_RDONLY);
+// 	if (fd < 0)
+// 		return ;
+// 	ptr->height = ft_caluc_maps_height(maps);
+// 	ptr->mtx = malloc((ptr->height + 1) * sizeof(char *));
+// 	if (!ptr->mtx)
+// 		return ;
+// 	line = get_next_line(fd);
+// 	i = 0;
+// 	while (line)
+// 	{
+// 		ptr->mtx[i] = line;
+// 		if (!ptr->mtx[i])
+// 			break ;
+// 		line = get_next_line(fd);
+// 		i++;
+// 	}
+// 	ptr->mtx[i] = NULL;
+// }
 
 int	main(int argc, char *argv[])
 {
