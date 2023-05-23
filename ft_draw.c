@@ -6,38 +6,33 @@
 /*   By: mrami <mrami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 16:45:31 by mrami             #+#    #+#             */
-/*   Updated: 2023/05/22 19:22:32 by mrami            ###   ########.fr       */
+/*   Updated: 2023/05/23 20:08:23 by mrami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-
 void	ft_rotat_mtx(double *x, double *y, int z, t_mtr *ptr)
 {
-	double xt;
-	double yt;
-	double	zt;
+	double	xt;
+	double	yt;
 
 	xt = *x;
 	yt = *y;
-	zt = z;
-	ptr->x_prime = xt * cos(ptr->teta) - yt * sin(ptr->teta);
-	ptr->y_prime = xt * sin(ptr->teta) + yt * cos(ptr->teta);
-	ptr->z_prime = zt;
+	*x = xt * cos(ptr->teta_x) - yt * sin(ptr->teta_x);
+	*y = xt * sin(ptr->teta_x) + yt * cos(ptr->teta_x) - z;
 }
 
 /* controlling and manipulating coordination */
 
 void	ft_control_coordinat(t_mtr *ptr)
 {
-	ptr->z0 = ptr->mtx[ptr->j][ptr->i] * ptr->factor;
-	ptr->z1 = ptr->mtx[ptr->j][ptr->i] * ptr->factor;
 	ptr->x0 *= ptr->zoming;
-	ptr->x1 *= ptr->zoming;
 	ptr->y0 *= ptr->zoming;
+	ptr->z0 *= ptr->zoming_z;
+	ptr->x1 *= ptr->zoming;
 	ptr->y1 *= ptr->zoming;
-	
+	ptr->z1 *= ptr->zoming_z;
 	ft_rotat_mtx(&ptr->x0, &ptr->y0, ptr->z0, ptr);
 	ft_rotat_mtx(&ptr->x1, &ptr->y1, ptr->z1, ptr);
 }
@@ -46,29 +41,28 @@ void	ft_control_coordinat(t_mtr *ptr)
 
 void	ft_dda_algo(t_mtr *ptr)
 {
-	int steps;
-	double x_increment, y_increment;
-	double x, y;
+	double	stp;
+	double	dx;
+	double	dy;
+	int		i;
 
-	double dx = ptr->x1 - ptr->x0;
-	double dy = ptr->y1 - ptr->y0;
-	if (fabs(dx) > fabs(dy))
-		steps = dx;
-	else
-		steps = dy;
-	x_increment = dx / steps;
-	y_increment = dy / steps;
-
-	x = ptr->x0;
-	y = ptr->y0;
 	ft_control_coordinat(ptr);
-	int i = 1;
-	while (++i < steps)
+	dx = ptr->x1 - ptr->x0;
+	dy = ptr->y1 - ptr->y0;
+	if (fabs(dx) > fabs(dy))
+		stp = dx;
+	else
+		stp = dy;
+	ptr->x_inc = dx / stp;
+	ptr->y_inc = dy / stp;
+	i = 0;
+	while (i < stp)
 	{
-		puts("dda");
-		mlx_pixel_put(ptr->mlx_ptr, ptr->win_ptr, round(x), round(y), ptr->color);
-		x += x_increment;
-		y += y_increment;
+		mlx_pixel_put(ptr->mlx_ptr, ptr->win_ptr, round(ptr->x0),
+			round(ptr->y0), ptr->color);
+		ptr->x0 += ptr->x_inc;
+		ptr->y0 += ptr->y_inc;
+		i++;
 	}
 }
 	/* 

@@ -6,7 +6,7 @@
 /*   By: mrami <mrami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 22:12:42 by mrami             #+#    #+#             */
-/*   Updated: 2023/05/22 18:47:24 by mrami            ###   ########.fr       */
+/*   Updated: 2023/05/23 20:17:48 by mrami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,14 @@
 # include<stdlib.h>
 # include<stdio.h>
 # include<limits.h>
-#include<math.h>
+# include<math.h>
 
 # ifndef BUFFER_SIZE
-# define BUFFER_SIZE 10
+#define	BUFFER_SIZE 10
 # endif
 
 #define WIDTH 1920
 #define HEIGHT 1080
-// ----------------
-// #define HORIZONTAL_LINE 0
-// #define VERTICAL_LINE 1
 
 typedef	struct	s_mtr
 {
@@ -41,32 +38,31 @@ typedef	struct	s_mtr
 	void	*win_ptr;
 	int		**mtx;
 	int		**mps_color;
-	double	teta;
-	double	sin_teta;
+	double	teta_x;
+	double	teta_y;
+	double	teta_z;
 	double	x0;
 	double	y0;
 	double	x1;
 	double	y1;
 	double	z0;
 	double	z1;
-	int		zoming;
+	double	zoming;
+	double	zoming_z;
 	double	factor;
-	double	x_prime;
-	double	y_prime;
-	double	z_prime;
 	int		i;
 	int		j;
-	// -----------
 	int		color;
-	int		stp;
-	double	Xinc;
-	double	Yinc;
+	double	x_inc;
+	double	y_inc;
+	int		len;
 }	t_mtr;
 
 int		ft_atoi(char *str);
 int		ft_calc_width(char *maps);
 int		ft_hex_to_dec(char *hexa);
 int		ft_calc_height(char *maps);
+int		ft_length_of_spliter(char **spl);
 size_t	ft_strlen(char const *s);
 char	*ft_strdup(char *s1);
 char	*ft_strchr(char *s, int c);

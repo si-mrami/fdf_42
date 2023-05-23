@@ -6,10 +6,9 @@
 /*   By: mrami <mrami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 23:13:32 by mrami             #+#    #+#             */
-/*   Updated: 2023/05/20 20:32:07 by mrami            ###   ########.fr       */
+/*   Updated: 2023/05/23 20:29:02 by mrami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "fdf.h"
 
@@ -115,20 +114,23 @@ void	ft_read_maps(char *mps, t_mtr *ptr)
 	int		fd;
 	int		i;
 	char	*line;
+	char	**spt;
+	int		len;
 
 	fd = open(mps, O_RDONLY);
 	if (fd < 0)
 		return ;
 	ptr->height = ft_calc_height(mps);
-	ptr->width = ft_calc_width(mps);
-	ptr->mtx = malloc(sizeof(int *) * (ptr->height + 1));
-	ptr->mps_color = malloc((ptr->height + 1) * sizeof(int *));
+	ptr->mtx = (int **) malloc(sizeof(int *) * (ptr->height + 1));
+	ptr->mps_color = (int **) malloc((ptr->height + 1) * sizeof(int *));
 	i = 0;
 	while (i < ptr->height)
 	{
-		ptr->mtx[i] = malloc((ptr->width + 1) * sizeof(int));
-		ptr->mps_color[i] = malloc(sizeof(int) * (ptr->width + 1));
 		line = get_next_line(fd);
+		spt = ft_split(line, ' ');
+		len = ft_length_of_spliter(spt);
+		ptr->mtx[i] = (int *) malloc((len + 1) * sizeof(int));
+		ptr->mps_color[i] = (int *) malloc(sizeof(int) * (len + 1));
 		ft_read_maps_color(ptr->mps_color[i], line, ptr->mtx[i]);
 		free(line);
 		i++;
