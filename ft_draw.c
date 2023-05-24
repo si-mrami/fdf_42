@@ -6,7 +6,7 @@
 /*   By: mrami <mrami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 16:45:31 by mrami             #+#    #+#             */
-/*   Updated: 2023/05/23 20:08:23 by mrami            ###   ########.fr       */
+/*   Updated: 2023/05/24 20:06:26 by mrami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,21 @@ void	ft_rotat_mtx(double *x, double *y, int z, t_mtr *ptr)
 {
 	double	xt;
 	double	yt;
+	double	zt;
+
+	yt = *y;
+	zt = z;
 
 	xt = *x;
+	*y = yt * cos(ptr->teta_x) - (zt * sin(ptr->teta_x));
+	z = yt * sin(ptr->teta_x) + (zt * cos(ptr->teta_x));
+
+	xt = *x * cos(ptr->teta_y) + (z * sin(ptr->teta_y));
 	yt = *y;
-	*x = xt * cos(ptr->teta_x) - yt * sin(ptr->teta_x);
-	*y = xt * sin(ptr->teta_x) + yt * cos(ptr->teta_x) - z;
+	zt = *x * (-sin(ptr->teta_y)) + z * cos(ptr->teta_y);
+
+	*x = xt * cos(ptr->teta_z) - (yt * sin(ptr->teta_z));
+	*y = xt * sin(ptr->teta_z) + (yt * cos(ptr->teta_z));
 }
 
 /* controlling and manipulating coordination */
@@ -58,8 +68,10 @@ void	ft_dda_algo(t_mtr *ptr)
 	i = 0;
 	while (i < stp)
 	{
-		mlx_pixel_put(ptr->mlx_ptr, ptr->win_ptr, round(ptr->x0),
-			round(ptr->y0), ptr->color);
+		ptr->sc_x = WIDTH / 2 - ptr->width * ptr->zoming / 2;
+		ptr->sc_y = HEIGHT / 2 - ptr->height * ptr->zoming / 2;
+		mlx_pixel_put(ptr->mlx_ptr, ptr->win_ptr, round(ptr->x0) + ptr->sc_x,
+			round(ptr->y0) + ptr->sc_y, ptr->color);
 		ptr->x0 += ptr->x_inc;
 		ptr->y0 += ptr->y_inc;
 		i++;

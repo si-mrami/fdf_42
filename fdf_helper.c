@@ -6,7 +6,7 @@
 /*   By: mrami <mrami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:49:18 by mrami             #+#    #+#             */
-/*   Updated: 2023/05/23 21:55:08 by mrami            ###   ########.fr       */
+/*   Updated: 2023/05/24 20:10:19 by mrami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ int	ft_hex_to_dec(char *hexa)
 
 /* convert deg to red */
 
-int	ft_convert(int deg)
+double	ft_convert(double deg)
 {
-	int	res;
+	double	res;
 
 	res = deg * M_PI / 180;
 	return (res);
@@ -81,11 +81,13 @@ int	ft_convert(int deg)
 void	ft_tronsformation(t_mtr *ptr)
 {
 	if (ptr->width < 25)
-		ptr->zoming = 30;
+		ptr->zoming = 40;
 	else if (ptr->width > 25)
 		ptr->zoming = 2;
-	ptr->zoming_z = 1;
-	ptr->teta_x = ft_convert(20);
+	ptr->zoming_z = 2;
+	ptr->teta_x = ft_convert(45);
+	ptr->teta_y = ft_convert(45);
+	ptr->teta_z = ft_convert(45);
 	ptr->factor = 2;
 }
 
