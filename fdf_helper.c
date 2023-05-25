@@ -6,7 +6,7 @@
 /*   By: mrami <mrami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:49:18 by mrami             #+#    #+#             */
-/*   Updated: 2023/05/24 20:10:19 by mrami            ###   ########.fr       */
+/*   Updated: 2023/05/25 04:15:55 by mrami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,16 @@ double	ft_convert(double deg)
 void	ft_tronsformation(t_mtr *ptr)
 {
 	if (ptr->width < 25)
-		ptr->zoming = 40;
+		ptr->zoming = 30;
 	else if (ptr->width > 25)
-		ptr->zoming = 2;
-	ptr->zoming_z = 2;
+		ptr->zoming = 1;
+	ptr->zoming_z = 1;
 	ptr->teta_x = ft_convert(45);
 	ptr->teta_y = ft_convert(45);
-	ptr->teta_z = ft_convert(45);
+	ptr->teta_z = ft_convert(-30);
 	ptr->factor = 2;
+	ptr->sc_x = WIDTH / 2;
+	ptr->sc_y = HEIGHT / 2;
 }
 
 /* lenght of spliter */
@@ -97,7 +99,7 @@ int	ft_length_of_spliter(char **spl)
 {
 	int	i;
 
-	i = 0;
+	i = 1;
 	while (spl[i])
 		i++;
 	return (i);

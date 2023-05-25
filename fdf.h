@@ -6,7 +6,7 @@
 /*   By: mrami <mrami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 22:12:42 by mrami             #+#    #+#             */
-/*   Updated: 2023/05/24 16:11:06 by mrami            ###   ########.fr       */
+/*   Updated: 2023/05/25 04:20:31 by mrami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,28 @@
 # include<limits.h>
 # include<math.h>
 
-# ifndef BUFFER_SIZE
-#define	BUFFER_SIZE 10
-# endif
+#ifndef BUFFER_SIZE
+#define BUFFER_SIZE 10
+#endif
 
 #define WIDTH 1920
 #define HEIGHT 1080
 
-typedef	struct	s_mtr
+typedef struct s_mlx
 {
-	int		width;
-	int		height;
 	void	*mlx_ptr;
 	void	*win_ptr;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_mlx;
+typedef struct s_mtr
+{
+	t_mlx	mlxd;
+	int		width;
+	int		height;
 	int		**mtx;
 	int		**mps_color;
 	double	teta_x;
@@ -47,6 +56,8 @@ typedef	struct	s_mtr
 	double	y1;
 	double	z0;
 	double	z1;
+	double	dx;
+	double	dy;
 	double	zoming;
 	double	zoming_z;
 	double	factor;
@@ -57,6 +68,7 @@ typedef	struct	s_mtr
 	double	y_inc;
 	int		sc_x;
 	int		sc_y;
+	int		len2;
 }	t_mtr;
 
 int		ft_atoi(char *str);
@@ -81,5 +93,12 @@ void	ft_read_maps(char *mps, t_mtr *ptr);
 void	ft_dda_algo(t_mtr *ptr);
 void	ft_control_coordinat(t_mtr *ptr);
 void	ft_tronsformation(t_mtr *ptr);
-
+void	my_mlx_pixel_put(t_mtr *data, int x, int y, int color);
+void	ft_check_wher_line(t_mtr *ptr, int x, int y, int checker);
+void	ft_draw(t_mtr *ptr);
+double	ft_convert(double deg);
+void	ft_rest(int key, t_mtr *ptr);
+void	ft_rest_my_imge(t_mtr *ptr);
+void	ft_print_error(const char *err);
+int		check_line(char *line);
 #endif

@@ -6,7 +6,7 @@
 /*   By: mrami <mrami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 23:13:32 by mrami             #+#    #+#             */
-/*   Updated: 2023/05/23 20:29:02 by mrami            ###   ########.fr       */
+/*   Updated: 2023/05/25 04:24:58 by mrami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	ft_atoi(char *str)
 	return (sign * num);
 }
 
-/* read of color */
+/* read maps color */
 
 void	ft_read_maps_color(int *color, char *line, int *map_line)
 {
@@ -118,21 +118,22 @@ void	ft_read_maps(char *mps, t_mtr *ptr)
 	int		len;
 
 	fd = open(mps, O_RDONLY);
-	if (fd < 0)
-		return ;
 	ptr->height = ft_calc_height(mps);
 	ptr->mtx = (int **) malloc(sizeof(int *) * (ptr->height + 1));
 	ptr->mps_color = (int **) malloc((ptr->height + 1) * sizeof(int *));
-	i = 0;
-	while (i < ptr->height)
+	ptr->len2 = check_line(mps);
+	i = -1;
+	while (++i < ptr->height)
 	{
 		line = get_next_line(fd);
 		spt = ft_split(line, ' ');
 		len = ft_length_of_spliter(spt);
+		if (i > 2 && len != ptr->len2)
+			ft_print_error("Same thing wornng in your maps,"
+				" please check your maps and try again!");
 		ptr->mtx[i] = (int *) malloc((len + 1) * sizeof(int));
 		ptr->mps_color[i] = (int *) malloc(sizeof(int) * (len + 1));
 		ft_read_maps_color(ptr->mps_color[i], line, ptr->mtx[i]);
 		free(line);
-		i++;
 	}
 }
