@@ -6,7 +6,7 @@
 /*   By: mrami <mrami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 20:14:30 by mrami             #+#    #+#             */
-/*   Updated: 2023/05/25 03:45:13 by mrami            ###   ########.fr       */
+/*   Updated: 2023/05/25 19:03:57 by mrami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	ft_control_my_key(int key, t_mtr *ptr)
 		ptr->teta_x -= ft_convert(5);
 	if (key == 24)
 		ptr->zoming += 1;
-	if (key == 27 && ptr->zoming)
+	if (key == 27 && ptr->zoming >= 1)
 		ptr->zoming -= 1;
 	ft_rest(key, ptr);
 	ft_rest_my_imge(ptr);
@@ -77,6 +77,17 @@ void	my_mlx_pixel_put(t_mtr *data, int x, int y, int color)
 	dst = data->mlxd.addr + (y * data->mlxd.line_length + x
 			* (data->mlxd.bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
+}
+
+/* close my programe */
+
+int	ft_is_close(int keycode)
+{
+	if (keycode)
+	{
+		exit(1);
+	}
+	return (0);
 }
 
 /* main programme */
@@ -102,6 +113,7 @@ int	main(int argc, char *argv[])
 	mlx_put_image_to_window(ptr.mlxd.mlx_ptr,
 		ptr.mlxd.win_ptr, ptr.mlxd.img, 0, 0);
 	mlx_hook(ptr.mlxd.win_ptr, 2, 0, ft_control_my_key, &ptr);
+	mlx_hook(ptr.mlxd.win_ptr, 17, 2, ft_is_close, &ptr);
 	mlx_loop(ptr.mlxd.mlx_ptr);
 	return (0);
 }

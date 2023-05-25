@@ -6,7 +6,7 @@
 /*   By: mrami <mrami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 16:45:31 by mrami             #+#    #+#             */
-/*   Updated: 2023/05/25 04:32:36 by mrami            ###   ########.fr       */
+/*   Updated: 2023/05/25 20:36:47 by mrami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	ft_control_coordinat(t_mtr *ptr)
 	ptr->y0 += ptr->sc_y;
 	ptr->x1 += ptr->sc_x;
 	ptr->y1 += ptr->sc_y;
-
 }
 
 /* get max of tow number */

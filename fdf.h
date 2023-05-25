@@ -6,7 +6,7 @@
 /*   By: mrami <mrami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 22:12:42 by mrami             #+#    #+#             */
-/*   Updated: 2023/05/25 04:20:31 by mrami            ###   ########.fr       */
+/*   Updated: 2023/05/25 20:33:38 by mrami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@
 # include<limits.h>
 # include<math.h>
 
-#ifndef BUFFER_SIZE
-#define BUFFER_SIZE 10
-#endif
+# define WIDTH 1920
+# define HEIGHT 1080
 
-#define WIDTH 1920
-#define HEIGHT 1080
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
 
 typedef struct s_mlx
 {

@@ -6,7 +6,7 @@
 /*   By: mrami <mrami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 20:14:30 by mrami             #+#    #+#             */
-/*   Updated: 2023/05/25 04:06:24 by mrami            ###   ########.fr       */
+/*   Updated: 2023/05/25 20:36:55 by mrami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,16 @@ int	check_line(char *line)
 	int		fd;
 	char	*m_line;
 	int		len;
+	int		i;
 
 	fd = open(line, O_RDONLY);
 	m_line = get_next_line(fd);
 	spt = ft_split(m_line, ' ');
+	free(m_line);
 	len = ft_length_of_spliter(spt);
+	i = 0;
+	while (spt[i])
+		free(spt[i++]);
+	free(spt);
 	return (len);
-
 }
