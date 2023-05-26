@@ -8,6 +8,7 @@ This project is about creating a simple wireframe model representation of a 3D l
 "-, +" zoming;
 "-, +" z_zoming;
 -> | <- : tronslation;
+" i " initial at defaut
 
 # images
 <img width="1926" alt="Screen Shot 2023-05-25 at 4 08 49 PM" src="https://github.com/ri-simohamed/fdf_42/assets/97769798/82bd5ac3-031a-44ac-b84a-0f24a5582cc0">
