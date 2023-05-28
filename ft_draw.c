@@ -6,11 +6,13 @@
 /*   By: mrami <mrami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 16:45:31 by mrami             #+#    #+#             */
-/*   Updated: 2023/05/25 20:36:47 by mrami            ###   ########.fr       */
+/*   Updated: 2023/05/28 15:20:23 by mrami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+/* 3D rotation on a point represented by its x, y, and z coordinates */
 
 void	ft_rotat_mtx(double *x, double *y, int z, t_mtr *ptr)
 {

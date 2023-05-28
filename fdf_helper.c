@@ -6,7 +6,7 @@
 /*   By: mrami <mrami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:49:18 by mrami             #+#    #+#             */
-/*   Updated: 2023/05/25 18:42:20 by mrami            ###   ########.fr       */
+/*   Updated: 2023/05/28 12:54:51 by mrami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,9 @@ int	ft_length_of_spliter(char **spl)
 {
 	int	i;
 
-	i = 1;
+	if (!spl)
+		ft_print_error("Error in your maps!");
+	i = 0;
 	while (spl[i])
 		i++;
 	return (i);

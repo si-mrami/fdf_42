@@ -6,7 +6,7 @@
 /*   By: mrami <mrami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 20:14:30 by mrami             #+#    #+#             */
-/*   Updated: 2023/05/25 20:36:55 by mrami            ###   ########.fr       */
+/*   Updated: 2023/05/28 14:23:29 by mrami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,26 +57,4 @@ void	ft_print_error(const char *err)
 {
 	write(2, err, ft_strlen(err));
 	exit (1);
-}
-
-/* check if my maps is good */
-
-int	check_line(char *line)
-{
-	char	**spt;
-	int		fd;
-	char	*m_line;
-	int		len;
-	int		i;
-
-	fd = open(line, O_RDONLY);
-	m_line = get_next_line(fd);
-	spt = ft_split(m_line, ' ');
-	free(m_line);
-	len = ft_length_of_spliter(spt);
-	i = 0;
-	while (spt[i])
-		free(spt[i++]);
-	free(spt);
-	return (len);
 }

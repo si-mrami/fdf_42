@@ -6,7 +6,7 @@
 /*   By: mrami <mrami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 22:12:42 by mrami             #+#    #+#             */
-/*   Updated: 2023/05/25 20:33:38 by mrami            ###   ########.fr       */
+/*   Updated: 2023/05/28 14:23:18 by mrami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,9 @@ typedef struct s_mtr
 	double	y_inc;
 	int		sc_x;
 	int		sc_y;
-	int		len2;
+	char	*line;
+	char	**spt;
+	int		len;
 }	t_mtr;
 
 int		ft_atoi(char *str);
